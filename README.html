@@ -1,0 +1,357 @@
+<!doctype html>
+<html lang="fr" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Instructions de Déploiement GitHub - Formulaire LAB TGS France</title>
+    <style>
+      body {
+        max-width: 880px;
+        margin: 0 auto;
+        padding: 32px 80px;
+        position: relative;
+        box-sizing: border-box;
+        font-family: 'Times New Roman', serif;
+        line-height: 1.6;
+        color: #000;
+        background: #fff;
+      }
+      h1 {
+        text-align: center;
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 40px;
+        text-decoration: underline;
+      }
+      h2 {
+        font-size: 18px;
+        font-weight: bold;
+        margin-top: 30px;
+        margin-bottom: 15px;
+        color: #000;
+      }
+      h3 {
+        font-size: 16px;
+        font-weight: bold;
+        margin-top: 20px;
+        margin-bottom: 10px;
+        color: #000;
+      }
+      p {
+        margin-bottom: 12px;
+        text-align: justify;
+      }
+      ul,
+      ol {
+        margin-bottom: 15px;
+        padding-left: 30px;
+      }
+      li {
+        margin-bottom: 8px;
+      }
+      code {
+        font-family: 'Courier New', monospace;
+        background-color: #f5f5f5;
+        padding: 2px 4px;
+        border: 1px solid #ddd;
+      }
+      .warning {
+        background-color: #fff3cd;
+        border: 1px solid #ffeaa7;
+        padding: 15px;
+        margin: 20px 0;
+      }
+      .important {
+        background-color: #d1ecf1;
+        border: 1px solid #bee5eb;
+        padding: 15px;
+        margin: 20px 0;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+      }
+      th,
+      td {
+        border: 1px solid #000;
+        padding: 8px;
+        text-align: left;
+      }
+      th {
+        background-color: #f0f0f0;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Instructions de Déploiement GitHub<br />Formulaire LAB TGS France</h1>
+
+    <h2>1. Introduction</h2>
+
+    <p>
+      Ce document détaille toutes les étapes nécessaires pour déployer le formulaire LAB (Lutte Anti-Blanchiment) de TGS
+      France sur GitHub Pages. Le formulaire sera accessible publiquement via une URL permanente et fonctionnera de
+      manière autonome avec envoi automatique des PDF par email.
+    </p>
+
+    <div class="important">
+      <strong>Important :</strong> Ce déploiement permettra à vos clients d'accéder au formulaire 24h/24 et 7j/7, avec
+      envoi automatique des formulaires complétés à votre adresse email.
+    </div>
+
+    <h2>2. Prérequis</h2>
+
+    <p>Avant de commencer, assurez-vous d'avoir :</p>
+    <ul>
+      <li>Un compte GitHub actif (gratuit)</li>
+      <li>Accès à vos fichiers dans l'espace de stockage AI Drive</li>
+      <li>Une connexion internet stable</li>
+      <li>Un navigateur web moderne</li>
+    </ul>
+
+    <h2>3. Structure des Fichiers à Télécharger</h2>
+
+    <p>Voici les fichiers que vous devez récupérer depuis votre espace de stockage :</p>
+
+    <table>
+      <tr>
+        <th>Fichier</th>
+        <th>Description</th>
+        <th>Obligatoire</th>
+      </tr>
+      <tr>
+        <td><code>questionnaire_lab_logo_tgs_france.html</code></td>
+        <td>Formulaire principal avec logo TGS France</td>
+        <td>Oui</td>
+      </tr>
+    </table>
+
+    <h3>3.1. Téléchargement des Fichiers</h3>
+
+    <ol>
+      <li>
+        Accédez à votre espace de stockage : <code>https://www.genspark.ai/aidrive/files/formulaires_clients</code>
+      </li>
+      <li>Téléchargez le fichier <code>questionnaire_lab_logo_tgs_france.html</code></li>
+      <li>Sauvegardez-le sur votre ordinateur</li>
+    </ol>
+
+    <h2>4. Création du Repository GitHub</h2>
+
+    <h3>4.1. Création du Repository</h3>
+
+    <ol>
+      <li>Connectez-vous à votre compte GitHub</li>
+      <li>Cliquez sur le bouton vert <strong>"New"</strong> ou l'icône <strong>"+"</strong> en haut à droite</li>
+      <li>Sélectionnez <strong>"New repository"</strong></li>
+      <li>
+        Configurez le repository :
+        <ul>
+          <li><strong>Repository name :</strong> <code>questionnaire-lab</code></li>
+          <li><strong>Description :</strong> "Formulaire LAB TGS France"</li>
+          <li>✅ Cochez <strong>"Public"</strong></li>
+          <li>✅ Cochez <strong>"Add a README file"</strong></li>
+        </ul>
+      </li>
+      <li>Cliquez sur <strong>"Create repository"</strong></li>
+    </ol>
+
+    <h3>4.2. Upload du Fichier HTML</h3>
+
+    <ol>
+      <li>Dans votre nouveau repository, cliquez sur <strong>"Add file"</strong></li>
+      <li>Sélectionnez <strong>"Upload files"</strong></li>
+      <li>Glissez-déposez ou sélectionnez le fichier <code>questionnaire_lab_logo_tgs_france.html</code></li>
+      <li><strong>IMPORTANT :</strong> Renommez le fichier en <code>index.html</code> avant de le commiter</li>
+      <li>Ajoutez un message de commit : "Ajout du formulaire LAB TGS France"</li>
+      <li>Cliquez sur <strong>"Commit changes"</strong></li>
+    </ol>
+
+    <div class="warning">
+      <strong>Attention :</strong> Le fichier DOIT s'appeler <code>index.html</code> pour que GitHub Pages l'affiche
+      automatiquement à la racine de votre site.
+    </div>
+
+    <h2>5. Configuration de GitHub Pages</h2>
+
+    <h3>5.1. Activation de GitHub Pages</h3>
+
+    <ol>
+      <li>Dans votre repository, cliquez sur l'onglet <strong>"Settings"</strong></li>
+      <li>Faites défiler vers le bas jusqu'à la section <strong>"Pages"</strong></li>
+      <li>Dans <strong>"Source"</strong>, sélectionnez <strong>"Deploy from a branch"</strong></li>
+      <li>Dans <strong>"Branch"</strong>, sélectionnez <strong>"main"</strong></li>
+      <li>Laissez <strong>"/ (root)"</strong> sélectionné</li>
+      <li>Cliquez sur <strong>"Save"</strong></li>
+    </ol>
+
+    <h3>5.2. Obtention de l'URL Publique</h3>
+
+    <p>Après avoir sauvegardé, GitHub vous indiquera l'URL de votre site :</p>
+    <p><code>https://[votre-nom-utilisateur].github.io/questionnaire-lab/</code></p>
+
+    <div class="important">
+      <strong>Note :</strong> Il peut y avoir un délai de 5 à 10 minutes avant que le site soit accessible.
+    </div>
+
+    <h2>6. Vérifications à Effectuer</h2>
+
+    <h3>6.1. Test du Formulaire</h3>
+
+    <ol>
+      <li>Accédez à votre URL GitHub Pages</li>
+      <li>Vérifiez que le logo TGS France s'affiche correctement</li>
+      <li>Testez le remplissage de quelques champs</li>
+      <li>Vérifiez la signature électronique</li>
+      <li>Testez l'export PDF</li>
+      <li>Vérifiez l'envoi email (avec un formulaire test)</li>
+    </ol>
+
+    <h3>6.2. Liste de Vérification</h3>
+
+    <table>
+      <tr>
+        <th>Élément</th>
+        <th>À Vérifier</th>
+        <th>Statut</th>
+      </tr>
+      <tr>
+        <td>Logo TGS France</td>
+        <td>Affichage correct en en-tête</td>
+        <td>☐</td>
+      </tr>
+      <tr>
+        <td>Thème Orange</td>
+        <td>Couleurs corporate correctes</td>
+        <td>☐</td>
+      </tr>
+      <tr>
+        <td>Formulaire</td>
+        <td>Tous les champs fonctionnels</td>
+        <td>☐</td>
+      </tr>
+      <tr>
+        <td>Signature</td>
+        <td>Zone de signature interactive</td>
+        <td>☐</td>
+      </tr>
+      <tr>
+        <td>Validation</td>
+        <td>Bouton sous la signature</td>
+        <td>☐</td>
+      </tr>
+      <tr>
+        <td>Notice LAB</td>
+        <td>Informations obligatoires présentes</td>
+        <td>☐</td>
+      </tr>
+      <tr>
+        <td>Export PDF</td>
+        <td>Génération correcte du PDF</td>
+        <td>☐</td>
+      </tr>
+      <tr>
+        <td>Envoi Email</td>
+        <td>Réception à benjamin.guillet@tgs-france.fr</td>
+        <td>☐</td>
+      </tr>
+    </table>
+
+    <h2>7. Partage du Formulaire</h2>
+
+    <h3>7.1. URL à Communiquer</h3>
+
+    <p>Une fois le déploiement réussi, communiquez cette URL à vos clients :</p>
+    <p><code>https://[votre-nom-utilisateur].github.io/questionnaire-lab/</code></p>
+
+    <h3>7.2. Communication Clients</h3>
+
+    <p>Exemple de message pour vos clients :</p>
+
+    <div style="border: 1px solid #ccc; padding: 15px; margin: 20px 0; font-style: italic">
+      "Dans le cadre de nos obligations légales de lutte anti-blanchiment, nous vous invitons à compléter notre
+      questionnaire en ligne à l'adresse suivante : [votre-url]. Ce formulaire sécurisé vous permettra de saisir vos
+      informations et de signer électroniquement le document."
+    </div>
+
+    <h2>8. Maintenance et Mises à Jour</h2>
+
+    <h3>8.1. Modification du Formulaire</h3>
+
+    <p>Pour modifier le formulaire :</p>
+    <ol>
+      <li>Téléchargez la nouvelle version depuis AI Drive</li>
+      <li>Renommez-la en <code>index.html</code></li>
+      <li>Uploadez-la dans votre repository GitHub (remplace l'ancienne)</li>
+      <li>Commitez les changes</li>
+    </ol>
+
+    <h3>8.2. Surveillance des Emails</h3>
+
+    <p>
+      Vérifiez régulièrement votre boîte email <code>benjamin.guillet@tgs-france.fr</code> pour les formulaires reçus.
+    </p>
+
+    <h2>9. Dépannage</h2>
+
+    <h3>9.1. Problèmes Courants</h3>
+
+    <table>
+      <tr>
+        <th>Problème</th>
+        <th>Solution</th>
+      </tr>
+      <tr>
+        <td>Site non accessible</td>
+        <td>Vérifier que GitHub Pages est activé et attendre 10 minutes</td>
+      </tr>
+      <tr>
+        <td>Logo ne s'affiche pas</td>
+        <td>Vérifier la connexion internet du client</td>
+      </tr>
+      <tr>
+        <td>Email non reçu</td>
+        <td>Vérifier les spams et tester avec un autre email</td>
+      </tr>
+      <tr>
+        <td>Formulaire ne se valide pas</td>
+        <td>Vérifier que tous les champs obligatoires sont remplis</td>
+      </tr>
+    </table>
+
+    <h3>9.2. Support</h3>
+
+    <p>
+      En cas de problème technique persistant, contactez le support via l'espace AI Drive ou revenez vers l'assistant
+      pour une assistance supplémentaire.
+    </p>
+
+    <h2>10. Conclusion</h2>
+
+    <p>
+      Votre formulaire LAB TGS France est maintenant déployé et accessible publiquement. Vos clients peuvent y accéder
+      24h/24, le compléter, le signer électroniquement, et vous recevrez automatiquement les PDF par email.
+    </p>
+
+    <p>
+      Cette solution digitale améliore votre efficacité opérationnelle tout en respectant les obligations réglementaires
+      de lutte anti-blanchiment.
+    </p>
+
+    <div class="important">
+      <strong>Rappel :</strong> Conservez ce document pour référence future et n'hésitez pas à effectuer des tests
+      réguliers pour vous assurer du bon fonctionnement du système.
+    </div>
+  </body>
+</html>
+
+    <script id="html_badge_script1">
+        window.__genspark_remove_badge_link = "https://www.genspark.ai/api/html_badge/" +
+            "remove_badge?token=To%2FBnjzloZ3UfQdcSaYfDkgUfT%2B75OBeAfQ8wLONSVkgj5Mv%2BUkOnOCI1Mq2Er1S86dVbc3%2FkUX1vEduTfreEEYtBppFGVJdzHhhau5HWCho%2FOPFM6%2Fq21gprwUjFpVOcL2%2FoRHV%2FprtZIeXEHAi7ul84esygXEHvquwuZVGfV7p5vcrxuTyTPZkKx8%2B7UVEeSd4IDcLvxt4rB8w0S6pLd8ZonYN8QViapni9GIJjviO%2FKkeQ7E66UTy1MvHkJ1hbCuggj2ZnDKvW0yiWL8MvxBDfCZwP%2FdEQxEmAIHDOzd12GKtCeRu9ZY29M5yDEDjyYAbnOZDqy2SbXBb3w%2BPuG%2FfpLH1EzYUfAdocN5IwsBIDRyy1YxZXC%2BTN0q4I4QIzoeBSiXkCVi3pAb2240WgRYA127v7p%2BbbmewPEwyqcajbfGyx8rvrAXsKCVdJXcvTpxx5QFJApABVQCrhan7Zeoe0S0viW%2BN7t97p3O0J5dEOeHJSGPAzaTAVL4BEQPEqcKzT%2Bk0II6%2B5YG9SeJ4Gp9ahO2tWCvfizAlnwe%2FW8s%3D";
+        window.__genspark_locale = "fr-FR";
+        window.__genspark_token = "To/BnjzloZ3UfQdcSaYfDkgUfT+75OBeAfQ8wLONSVkgj5Mv+UkOnOCI1Mq2Er1S86dVbc3/kUX1vEduTfreEEYtBppFGVJdzHhhau5HWCho/OPFM6/q21gprwUjFpVOcL2/oRHV/prtZIeXEHAi7ul84esygXEHvquwuZVGfV7p5vcrxuTyTPZkKx8+7UVEeSd4IDcLvxt4rB8w0S6pLd8ZonYN8QViapni9GIJjviO/KkeQ7E66UTy1MvHkJ1hbCuggj2ZnDKvW0yiWL8MvxBDfCZwP/dEQxEmAIHDOzd12GKtCeRu9ZY29M5yDEDjyYAbnOZDqy2SbXBb3w+PuG/fpLH1EzYUfAdocN5IwsBIDRyy1YxZXC+TN0q4I4QIzoeBSiXkCVi3pAb2240WgRYA127v7p+bbmewPEwyqcajbfGyx8rvrAXsKCVdJXcvTpxx5QFJApABVQCrhan7Zeoe0S0viW+N7t97p3O0J5dEOeHJSGPAzaTAVL4BEQPEqcKzT+k0II6+5YG9SeJ4Gp9ahO2tWCvfizAlnwe/W8s=";
+    </script>
+    
+    <script id="html_notice_dialog_script" src="https://www.genspark.ai/notice_dialog.js"></script>
+    

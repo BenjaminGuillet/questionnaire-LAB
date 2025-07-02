@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Questionnaire LAB - TGS France</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+    <style>
+        :root {
+            --tgs-orange: #FF8C00;
+            --tgs-orange-light: #FFA500;
+            --tgs-orange-dark: #E67E22;
+        }
+        
+        .tgs-gradient {
+            background: linear-gradient(135deg, var(--tgs-orange) 0%, var(--tgs-orange-light) 100%);
+        }
+        
+        .tgs-btn {
+            background: var(--tgs-orange);
+            transition: all 0.3s ease;
+        }
+        
+        .tgs-btn:hover {
+            background: var(--tgs-orange-dark);
+            transform: translateY(-2px);
+        }
+        
+        .signature-pad {
+            border: 2px solid var(--tgs-orange);
+            border-radius: 8px;
+        }
+        
+        .form-section {
+            border-left: 4px solid var(--tgs-orange);
+        }
+        
+        input[type="radio"]:checked {
+            background-color: var(--tgs-orange);
+            border-color: var(--tgs-orange);
+        }
+        
+        input[type="checkbox"]:checked {
+            background-color: var(--tgs-orange);
+            border-color: var(--tgs-orange);
+        }
+        
+        .notice-section {
+            background: linear-gradient(45deg, #fff5f0 0%, #ffe8d6 100%);
+            border: 1px solid var(--tgs-orange-light);
+        }
+        
+         {
+            body { print-color-adjust: exact; }
+            .no-print { display: none !important; }
+        }
+        
+        .logo-container {
+            max-height: 120px;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <div class="container mx-auto px-4 py-8 max-w-4xl">
+        <!-- En-tête avec logo TGS France -->
+        <div class="bg-white rounded-lg shadow-lg mb-8 p-6">
+            <div class="flex flex-col items-center text-center">
+                <div class="logo-container mb-4">
+                    <img src="https://tgs-france.com/wp-content/uploads/2021/09/TGS_FRANCE-01-e1664197927643.png" 
+                         alt="TGS France" class="h-20 object-contain mx-auto">
+                </div>
+                <h1 class="text-3xl font-bold text-gray-800 mb-2">Questionnaire LAB</h1>
+                <div class="w-24 h-1 tgs-gradient rounded-full"></div>
+            </div>
+        </div>
+
+        <!-- Formulaire principal -->
+        <form id="labForm" class="space-y-8">
+            <!-- Section 1: Informations personnelles -->
+            <div class="bg-white rounded-lg shadow-lg p-6 form-section pl-8">
+                <h2 class="text-xl font-semibold text-gray-800 mb-6 flex items-center">
+                    <i class="fas fa-user text-orange-500 mr-3"></i>
+                    Informations Personnelles
+                </h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Nom *</label>
+                        <input type="text" id="nom" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Prénom *</label>
+                        <input type="text" id="prenom" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500">
+                    </div>
+                </div>
+                
+                <div class="mt-6">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Adresse *</label>
+                    <textarea id="adresse" required rows="3" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"></textarea>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">N° téléphone *</label>
+                        <input type="tel" id="telephone" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Adresse mail *</label>
+                        <input type="email" id="email" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 2: Activité professionnelle -->
+            <div class="bg-white rounded-lg shadow-lg p-6 form-section pl-8">
+                <h2 class="text-xl font-semibold text-gray-800 mb-6 flex items-center">
+                    <i class="fas fa-briefcase text-orange-500 mr-3"></i>
+                    Activité Professionnelle
+                </h2>
+                
+                <div class="mb-6">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Fonction précise (ou dernière exercée) *</label>
+                    <input type="text" id="fonction" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500">
+                </div>
+                
+                <div class="mb-6">
+                    <label class="block text-sm font-medium text-gray-700 mb-4">Catégories professionnelles *</label>
+                    <div class="grid grid-cols-2 gap-4">
+                        <label class="flex items-center"><input type="radio" name="categorie" value="dirigeant" class="mr-2" required> Dirigeant de société</label>
+                        <label class="flex items-center"><input type="radio" name="categorie" value="mandat" class="mr-2"> Mandat public</label>
+                        <label class="flex items-center"><input type="radio" name="categorie" value="cadre" class="mr-2"> Salarié cadre</label>
+                        <label class="flex items-center"><input type="radio" name="categorie" value="fonctionnaire" class="mr-2"> Fonctionnaire</label>
+                        <label class="flex items-center"><input type="radio" name="categorie" value="non-cadre" class="mr-2"> Salarié non cadre</label>
+                        <label class="flex items-center"><input type="radio" name="categorie" value="liberal" class="mr-2"> Profession libérale/indépendant</label>
+                        <label class="flex items-center"><input type="radio" name="categorie" value="retraite" class="mr-2"> Retraité</label>
+                        <label class="flex items-center"><input type="radio" name="categorie" value="inactif" class="mr-2"> Inactif</label>
+                        <label class="flex items-center"><input type="radio" name="categorie" value="tutelle" class="mr-2"> Tutelle/curatelle</label>
+                    </div>
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">N° SIREN (si dirigeant/profession libérale)</label>
+                    <input type="text" id="siren" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500">
+                </div>
+            </div>
+
+            <!-- Section 3: Situation familiale -->
+            <div class="bg-white rounded-lg shadow-lg p-6 form-section pl-8">
+                <h2 class="text-xl font-semibold text-gray-800 mb-6 flex items-center">
+                    <i class="fas fa-home text-orange-500 mr-3"></i>
+                    Situation Familiale
+                </h2>
+                
+                <div class="mb-6">
+                    <label class="block text-sm font-medium text-gray-700 mb-4">Êtes-vous ? *</label>
+                    <div class="flex flex-wrap gap-4">
+                        <label class="flex items-center"><input type="radio" name="situation" value="celibataire" class="mr-2" required> Célibataire</label>
+                        <label class="flex items-center"><input type="radio" name="situation" value="veuf" class="mr-2"> Veuf</label>
+                        <label class="flex items-center"><input type="radio" name="situation" value="divorce" class="mr-2"> Divorcé</label>
+                        <label class="flex items-center"><input type="radio" name="situation" value="pacse" class="mr-2"> Pacsé</label>
+                        <label class="flex items-center"><input type="radio" name="situation" value="marie" class="mr-2"> Marié</label>
+                    </div>
+                </div>
+                
+                <div class="mb-6">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Si pacsé ou marié, profession du partenaire/conjoint</label>
+                    <input type="text" id="profession-conjoint" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500">
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-4">Avez-vous des enfants ? *</label>
+                        <div class="flex gap-4">
+                            <label class="flex items-center"><input type="radio" name="enfants" value="oui" class="mr-2" required> Oui</label>
+                            <label class="flex items-center"><input type="radio" name="enfants" value="non" class="mr-2"> Non</label>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Si oui, combien ?</label>
+                        <input type="number" id="nombre-enfants" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Dont mineurs</label>
+                        <input type="number" id="enfants-mineurs" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 4: Données financières -->
+            <div class="bg-white rounded-lg shadow-lg p-6 form-section pl-8">
+                <h2 class="text-xl font-semibold text-gray-800 mb-6 flex items-center">
+                    <i class="fas fa-euro-sign text-orange-500 mr-3"></i>
+                    Données Financières et Patrimoniales du Foyer
+                </h2>
+                
+                <div class="mb-6">
+                    <label class="block text-sm font-medium text-gray-700 mb-4">Revenus annuels globaux *</label>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <label class="flex items-center"><input type="radio" name="revenus" value="<50k" class="mr-2" required> &lt; 50 000 Euros</label>
+                        <label class="flex items-center"><input type="radio" name="revenus" value="200k-500k" class="mr-2"> De 200 001 à 500 000 Euros</label>
+                        <label class="flex items-center"><input type="radio" name="revenus" value="50k-100k" class="mr-2"> De 50 000 à 100 000 Euros</label>
+                        <label class="flex items-center"><input type="radio" name="revenus" value=">500k" class="mr-2"> &gt; 500 000 Euros</label>
+                        <label class="flex items-center"><input type="radio" name="revenus" value="100k-200k" class="mr-2"> De 100 001 à 200 000 Euros</label>
+                    </div>
+                </div>
+                
+                <div class="mb-6">
+                    <label class="block text-sm font-medium text-gray-700 mb-4">Patrimoine global *</label>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <label class="flex items-center"><input type="radio" name="patrimoine" value="<100k" class="mr-2" required> &lt; 100 000 Euros</label>
+                        <label class="flex items-center"><input type="radio" name="patrimoine" value="1M-5M" class="mr-2"> De 1 000 001 à 5 000 000 Euros</label>
+                        <label class="flex items-center"><input type="radio" name="patrimoine" value="100k-300k" class="mr-2"> De 100 000 à 300 000 Euros</label>
+                        <label class="flex items-center"><input type="radio" name="patrimoine" value="5M-10M" class="mr-2"> De 5 000 001 à 10 000 000 Euros</label>
+                        <label class="flex items-center"><input type="radio" name="patrimoine" value="300k-500k" class="mr-2"> De 300 001 à 500 000 Euros</label>
+                        <label class="flex items-center"><input type="radio" name="patrimoine" value=">10M" class="mr-2"> &gt; 10 000 000 Euros</label>
+                        <label class="flex items-center"><input type="radio" name="patrimoine" value="500k-1M" class="mr-2"> De 500 001 à 1 000 000 Euros</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 5: Autres informations -->
+            <div class="bg-white rounded-lg shadow-lg p-6 form-section pl-8">
+                <h2 class="text-xl font-semibold text-gray-800 mb-6 flex items-center">
+                    <i class="fas fa-info-circle text-orange-500 mr-3"></i>
+                    Autres Informations
+                </h2>
+                
+                <div class="mb-6">
+                    <label class="block text-sm font-medium text-gray-700 mb-4">
+                        Exercez-vous (ou une personne de votre entourage exerce-t-elle) ou avez-vous exercé au cours de ces 12 derniers mois une fonction politique, juridictionnelle ou administrative importante ? *
+                    </label>
+                    <div class="flex gap-4 mb-4">
+                        <label class="flex items-center"><input type="radio" name="fonction-politique" value="oui" class="mr-2" required> Oui</label>
+                        <label class="flex items-center"><input type="radio" name="fonction-politique" value="non" class="mr-2"> Non</label>
+                    </div>
+                    
+                    <div id="details-fonction" class="hidden grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Par qui ?</label>
+                            <input type="text" id="par-qui" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Lien de parenté</label>
+                            <input type="text" id="lien-parente" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Fonction exercée</label>
+                            <input type="text" id="fonction-exercee" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Dans quel pays ?</label>
+                            <input type="text" id="pays-fonction" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Depuis le (JJMMAAAA)</label>
+                            <input type="text" id="depuis-le" pattern="[0-9]{8}" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Jusqu'au (JJMMAAAA)</label>
+                            <input type="text" id="jusqu-au" pattern="[0-9]{8}" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 6: Projets d'entreprise -->
+            <div class="bg-white rounded-lg shadow-lg p-6 form-section pl-8">
+                <h2 class="text-xl font-semibold text-gray-800 mb-6 flex items-center">
+                    <i class="fas fa-rocket text-orange-500 mr-3"></i>
+                    Projet de Création ou Prise de Participation
+                </h2>
+                
+                <div class="mb-6">
+                    <label class="block text-sm font-medium text-gray-700 mb-4">J'envisage de créer une entreprise *</label>
+                    <div class="flex gap-4 mb-4">
+                        <label class="flex items-center"><input type="radio" name="creation" value="oui" class="mr-2" required> Oui</label>
+                        <label class="flex items-center"><input type="radio" name="creation" value="non" class="mr-2"> Non</label>
+                    </div>
+                    
+                    <div id="details-creation" class="hidden">
+                        <label class="block text-sm font-medium text-gray-700 mb-4">Si oui, financement par apports personnels entre :</label>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <label class="flex items-center"><input type="radio" name="financement-creation" value="0-50k" class="mr-2"> 0 et 50 K€</label>
+                            <label class="flex items-center"><input type="radio" name="financement-creation" value="50-100k" class="mr-2"> 50 et 100 K€</label>
+                            <label class="flex items-center"><input type="radio" name="financement-creation" value=">100k" class="mr-2"> > 100 K€</label>
+                        </div>
+                        <div class="mt-4">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Si > 100 K€, combien ?</label>
+                            <input type="number" id="montant-creation" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mb-6">
+                    <label class="block text-sm font-medium text-gray-700 mb-4">J'envisage de reprendre une entreprise *</label>
+                    <div class="flex gap-4 mb-4">
+                        <label class="flex items-center"><input type="radio" name="reprise" value="oui" class="mr-2" required> Oui</label>
+                        <label class="flex items-center"><input type="radio" name="reprise" value="non" class="mr-2"> Non</label>
+                    </div>
+                    
+                    <div id="details-reprise" class="hidden">
+                        <label class="block text-sm font-medium text-gray-700 mb-4">Si oui, financement par apports personnels entre :</label>
+                        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                            <label class="flex items-center"><input type="radio" name="financement-reprise" value="0-50k" class="mr-2"> 0 et 50 K€</label>
+                            <label class="flex items-center"><input type="radio" name="financement-reprise" value="50-100k" class="mr-2"> 50 et 100 K€</label>
+                            <label class="flex items-center"><input type="radio" name="financement-reprise" value="100-200k" class="mr-2"> 100 et 200 K€</label>
+                            <label class="flex items-center"><input type="radio" name="financement-reprise" value=">200k" class="mr-2"> > 200 K€</label>
+                        </div>
+                        <div class="mt-4">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Si > 200 K€, combien ?</label>
+                            <input type="number" id="montant-reprise" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mb-6">
+                    <label class="block text-sm font-medium text-gray-700 mb-4">Origine de ces fonds (plusieurs cases possibles) :</label>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <label class="flex items-center"><input type="checkbox" name="origine-fonds" value="epargne" class="mr-2"> Épargne</label>
+                        <label class="flex items-center"><input type="checkbox" name="origine-fonds" value="indemnite" class="mr-2"> Indemnité de licenciement ou RC</label>
+                        <label class="flex items-center"><input type="checkbox" name="origine-fonds" value="epargne-salariale" class="mr-2"> Épargne salariale</label>
+                        <label class="flex items-center"><input type="checkbox" name="origine-fonds" value="cession" class="mr-2"> Cession titres de participation</label>
+                        <label class="flex items-center"><input type="checkbox" name="origine-fonds" value="donation" class="mr-2"> Donation / Héritage</label>
+                    </div>
+                    <div class="mt-4">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Autre (à préciser) :</label>
+                        <input type="text" id="autre-origine" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 7: Signature -->
+            <div class="bg-white rounded-lg shadow-lg p-6 form-section pl-8">
+                <h2 class="text-xl font-semibold text-gray-800 mb-6 flex items-center">
+                    <i class="fas fa-signature text-orange-500 mr-3"></i>
+                    Signature
+                </h2>
+                
+                <div class="mb-6">
+                    <p class="text-sm text-gray-600 mb-4">
+                        Je certifie sur l'honneur l'exactitude des informations contenues dans le présent document.
+                    </p>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Date *</label>
+                            <input type="date" id="date-signature" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500">
+                        </div>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Signature électronique *</label>
+                        <canvas id="signatureCanvas" class="signature-pad bg-gray-50 cursor-crosshair" width="400" height="200"></canvas>
+                        <div class="mt-2 flex gap-2">
+                            <button type="button" id="clearSignature" class="px-4 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600 transition-colors">
+                                <i class="fas fa-eraser mr-2"></i>Effacer
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Bouton de validation -->
+                <div class="text-center">
+                    <button type="submit" class="tgs-btn text-white px-8 py-3 rounded-lg font-semibold text-lg flex items-center justify-center mx-auto">
+                        <i class="fas fa-check mr-2"></i>
+                        Valider le Formulaire
+                    </button>
+                </div>
+            </div>
+
+            <!-- Notice explicative -->
+            <div class="notice-section rounded-lg p-6">
+                <h2 class="text-xl font-semibold text-gray-800 mb-6 text-center">Notice Explicative</h2>
+                
+                <div class="space-y-6 text-sm">
+                    <div class="bg-white p-4 rounded-lg">
+                        <h3 class="font-semibold text-gray-800 mb-2">Pourquoi mon expert-comptable me réclame-t-il des données personnelles avant la signature de la lettre de mission ?</h3>
+                        <p class="text-gray-700">Parce que mon expert-comptable participe à la prévention du blanchiment de capitaux et du financement du terrorisme. La réglementation l'oblige, à ce titre, à avoir une connaissance actualisée de tous ses clients et à suivre leurs opérations. Le non respect de ces obligations l'expose à une responsabilité disciplinaire et pénale.</p>
+                    </div>
+                    
+                    <div class="bg-white p-4 rounded-lg">
+                        <h3 class="font-semibold text-gray-800 mb-2">Quels éléments d'information à caractère personnel doit collecter mon expert-comptable ?</h3>
+                        <p class="text-gray-700">Mon expert-comptable doit m'identifier et connaître mon adresse actuelle. Il doit disposer d'éléments d'informations de nature économique (les revenus, l'activité professionnelle et le patrimoine) nécessaires pour s'assurer de la cohérence de mes opérations. Il peut solliciter des explications et des éléments d'information supplémentaires en cas d'opération particulière ou d'un montant relativement élevé.</p>
+                    </div>
+                    
+                    <div class="bg-white p-4 rounded-lg">
+                        <h3 class="font-semibold text-gray-800 mb-2">Quelles sont mes obligations dans ce cadre ?</h3>
+                        <p class="text-gray-700">Je dois présenter un document d'identité en cours de validité (carte nationale d'identité, passeport, permis de conduire, titres de séjour d'étranger, livret de circulation) et fournir un justificatif de domicile (quittance de loyer, facture d'électricité ou de téléphone, …). Je dois déclarer mon activité professionnelle, mes ressources et le cas échéant mon patrimoine. Je dois justifier du montant et de la nature des opérations particulières que je réalise et être en mesure de justifier de l'origine et/ou de la destination des fonds. À défaut de fournir ces éléments, je m'expose au refus de mon expert-comptable à poursuivre sa mission.</p>
+                    </div>
+                    
+                    <div class="bg-white p-4 rounded-lg">
+                        <h3 class="font-semibold text-gray-800 mb-2">Qui est le bénéficiaire effectif ?</h3>
+                        <p class="text-gray-700">Le bénéficiaire effectif est la (ou les) personne(s) physique(s) qui contrôle(nt) directement ou indirectement (via société interposée) une société.</p>
+                    </div>
+                    
+                    <div class="bg-white p-4 rounded-lg">
+                        <h3 class="font-semibold text-gray-800 mb-2">Qui doit déclarer le (ou les) bénéficiaire(s) effectif(s) ?</h3>
+                        <p class="text-gray-700">C'est à la société (donc au mandataire social gérant ou président) de remplir cette obligation auprès du greffe du Tribunal de Commerce dont elle dépend. À chaque changement de bénéficiaire effectif, une nouvelle déclaration doit être effectuée. Vous devez conserver les preuves du respect de vos obligations et notamment le récépissé de dépôt reçu du greffe et attestant des formalités accomplies.</p>
+                    </div>
+                    
+                    <div class="bg-white p-4 rounded-lg">
+                        <h3 class="font-semibold text-gray-800 mb-2">Quelles sont vos obligations à notre égard ?</h3>
+                        <p class="text-gray-700">La société doit transmettre à l'expert-comptable les informations sollicitées sur l'identification du (ou des) bénéficiaire(s) effectif(s).</p>
+                    </div>
+                    
+                    <div class="bg-white p-4 rounded-lg">
+                        <h3 class="font-semibold text-gray-800 mb-2">Quelles sont les sanctions ?</h3>
+                        <p class="text-gray-700"><strong>Art 574-5 du Code Monétaire et Financier :</strong> Est puni d'un emprisonnement de six mois et d'une amende de 7 500 euros le fait de ne pas fournir aux personnes mentionnées à l'article L. 561-2 (dont les experts-comptables) dans le cadre des mesures de vigilance prévues à la section 3 du chapitre 1er du titre VI ou de ne pas déclarer au registre du commerce et des sociétés les informations relatives aux bénéficiaires effectifs requises en application du premier alinéa de l'article L. 561-46, ou de déclarer des informations inexactes ou incomplètes.</p>
+                    </div>
+                    
+                    <div class="text-center text-xs text-gray-600 mt-4">
+                        <p>1 - Articles L 561-5 et L 561-6, R 561-5 à R561-8, R 561-11 et R 561-12 du code monétaire et financier</p>
+                        <p>2 - Articles L 561-8 et R 561-14 du code monétaire et financier</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Information RGPD -->
+            <div class="bg-gray-100 rounded-lg p-6">
+                <p class="text-xs text-gray-600 leading-relaxed">
+                    La collecte de vos données personnelles est effectuée dans le cadre d'un traitement relatif à la gestion des fichiers de prospects ou de clients. Les données personnelles collectées peuvent être utilisées pour des traitements de lutte contre la fraude afin de la prévenir, de la détecter ou de gérer les opérations, actes ou omissions à risques et pouvant conduire à l'inscription sur une liste de personnes présentant un risque de fraude. Conformément à la loi du 6 janvier 1978 modifiée, vous bénéficiez d'un droit d'accès, d'interrogation, de rectification et d'opposition sur les données qui vous concernent, sur simple courrier.
+                </p>
+            </div>
+        </form>
+    </div>
+
+    <!-- Messages de confirmation -->
+    <div id="successMessage" class="fixed top-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg hidden">
+        <i class="fas fa-check-circle mr-2"></i>
+        Formulaire envoyé avec succès !
+    </div>
+
+    <div id="errorMessage" class="fixed top-4 right-4 bg-red-500 text-white px-6 py-3 rounded-lg shadow-lg hidden">
+        <i class="fas fa-exclamation-circle mr-2"></i>
+        Erreur lors de l'envoi. Veuillez réessayer.
+    </div>
+
+    <script>
+        // Gestion de la signature électronique
+        const canvas = document.getElementById('signatureCanvas');
+        const ctx = canvas.getContext('2d');
+        let isDrawing = false;
+        let hasSignature = false;
+
+        // Configuration du canvas pour la signature
+        function setupCanvas() {
+            const rect = canvas.getBoundingClientRect();
+            canvas.width = rect.width;
+            canvas.height = rect.height;
+            ctx.lineWidth = 2;
+            ctx.lineCap = 'round';
+            ctx.strokeStyle = '#000';
+        }
+
+        setupCanvas();
+        
+        // Événements de dessin
+        canvas.addEventListener('mousedown', startDrawing);
+        canvas.addEventListener('mousemove', draw);
+        canvas.addEventListener('mouseup', stopDrawing);
+        canvas.addEventListener('touchstart', handleTouch);
+        canvas.addEventListener('touchmove', handleTouch);
+        canvas.addEventListener('touchend', stopDrawing);
+
+        function startDrawing(e) {
+            isDrawing = true;
+            hasSignature = true;
+            const rect = canvas.getBoundingClientRect();
+            ctx.beginPath();
+            ctx.moveTo(e.clientX - rect.left, e.clientY - rect.top);
+        }
+
+        function draw(e) {
+            if (!isDrawing) return;
+            const rect = canvas.getBoundingClientRect();
+            ctx.lineTo(e.clientX - rect.left, e.clientY - rect.top);
+            ctx.stroke();
+        }
+
+        function stopDrawing() {
+            isDrawing = false;
+        }
+
+        function handleTouch(e) {
+            e.preventDefault();
+            const touch = e.touches[0];
+            const mouseEvent = new MouseEvent(e.type === 'touchstart' ? 'mousedown' : 
+                                            e.type === 'touchmove' ? 'mousemove' : 'mouseup', {
+                clientX: touch.clientX,
+                clientY: touch.clientY
+            });
+            canvas.dispatchEvent(mouseEvent);
+        }
+
+        // Effacer la signature
+        document.getElementById('clearSignature').addEventListener('click', function() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            hasSignature = false;
+        });
+
+        // Gestion des champs conditionnels
+        document.querySelectorAll('input[name="fonction-politique"]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                const details = document.getElementById('details-fonction');
+                if (this.value === 'oui') {
+                    details.classList.remove('hidden');
+                } else {
+                    details.classList.add('hidden');
+                }
+            });
+        });
+
+        document.querySelectorAll('input[name="creation"]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                const details = document.getElementById('details-creation');
+                if (this.value === 'oui') {
+                    details.classList.remove('hidden');
+                } else {
+                    details.classList.add('hidden');
+                }
+            });
+        });
+
+        document.querySelectorAll('input[name="reprise"]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                const details = document.getElementById('details-reprise');
+                if (this.value === 'oui') {
+                    details.classList.remove('hidden');
+                } else {
+                    details.classList.add('hidden');
+                }
+            });
+        });
+
+        // Date automatique
+        document.getElementById('date-signature').valueAsDate = new Date();
+
+        // Soumission du formulaire
+        document.getElementById('labForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Validation de la signature
+            if (!hasSignature) {
+                alert('Veuillez signer le formulaire avant de le soumettre.');
+                return;
+            }
+            
+            // Collecte des données
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData.entries());
+            
+            // Ajout des données de signature
+            data.signature = canvas.toDataURL();
+            data.dateSignature = document.getElementById('date-signature').value;
+            
+            // Collecte des cases à cocher multiples
+            const origineFonds = [];
+            document.querySelectorAll('input[name="origine-fonds"]:checked').forEach(checkbox => {
+                origineFonds.push(checkbox.value);
+            });
+            data.origineFonds = origineFonds;
+            
+            // Génération et envoi du PDF
+            generateAndSendPDF(data);
+        });
+
+        async function generateAndSendPDF(data) {
+            try {
+                // Création du PDF avec jsPDF
+                const { jsPDF } = window.jspdf;
+                const pdf = new jsPDF('p', 'mm', 'a4');
+                
+                // Configuration des couleurs TGS
+                const orangeColor = [255, 140, 0];
+                
+                // En-tête avec logo (simulé)
+                pdf.setFillColor(...orangeColor);
+                pdf.rect(0, 0, 210, 30, 'F');
+                pdf.setTextColor(255, 255, 255);
+                pdf.setFontSize(20);
+                pdf.text('TGS FRANCE', 20, 20);
+                pdf.setFontSize(16);
+                pdf.text('Questionnaire LAB', 20, 25);
+                
+                // Contenu du formulaire
+                pdf.setTextColor(0, 0, 0);
+                pdf.setFontSize(12);
+                let yPos = 40;
+                
+                // Informations personnelles
+                pdf.setFontSize(14);
+                pdf.setTextColor(...orangeColor);
+                pdf.text('INFORMATIONS PERSONNELLES', 20, yPos);
+                yPos += 10;
+                
+                pdf.setFontSize(10);
+                pdf.setTextColor(0, 0, 0);
+                pdf.text(`Nom: ${data.nom || ''}`, 20, yPos);
+                pdf.text(`Prénom: ${data.prenom || ''}`, 120, yPos);
+                yPos += 7;
+                pdf.text(`Adresse: ${data.adresse || ''}`, 20, yPos);
+                yPos += 7;
+                pdf.text(`Téléphone: ${data.telephone || ''}`, 20, yPos);
+                pdf.text(`Email: ${data.email || ''}`, 120, yPos);
+                yPos += 15;
+                
+                // Activité professionnelle
+                pdf.setFontSize(14);
+                pdf.setTextColor(...orangeColor);
+                pdf.text('ACTIVITÉ PROFESSIONNELLE', 20, yPos);
+                yPos += 10;
+                
+                pdf.setFontSize(10);
+                pdf.setTextColor(0, 0, 0);
+                pdf.text(`Fonction: ${data.fonction || ''}`, 20, yPos);
+                yPos += 7;
+                pdf.text(`Catégorie: ${data.categorie || ''}`, 20, yPos);
+                yPos += 7;
+                pdf.text(`SIREN: ${data.siren || ''}`, 20, yPos);
+                yPos += 15;
+                
+                // Situation familiale
+                pdf.setFontSize(14);
+                pdf.setTextColor(...orangeColor);
+                pdf.text('SITUATION FAMILIALE', 20, yPos);
+                yPos += 10;
+                
+                pdf.setFontSize(10);
+                pdf.setTextColor(0, 0, 0);
+                pdf.text(`Situation: ${data.situation || ''}`, 20, yPos);
+                yPos += 7;
+                pdf.text(`Enfants: ${data.enfants || ''}`, 20, yPos);
+                if (data['nombre-enfants']) {
+                    pdf.text(`Nombre: ${data['nombre-enfants']}`, 80, yPos);
+                }
+                yPos += 15;
+                
+                // Données financières
+                pdf.setFontSize(14);
+                pdf.setTextColor(...orangeColor);
+                pdf.text('DONNÉES FINANCIÈRES', 20, yPos);
+                yPos += 10;
+                
+                pdf.setFontSize(10);
+                pdf.setTextColor(0, 0, 0);
+                pdf.text(`Revenus: ${data.revenus || ''}`, 20, yPos);
+                yPos += 7;
+                pdf.text(`Patrimoine: ${data.patrimoine || ''}`, 20, yPos);
+                yPos += 15;
+                
+                // Signature
+                if (yPos > 250) {
+                    pdf.addPage();
+                    yPos = 20;
+                }
+                
+                pdf.setFontSize(14);
+                pdf.setTextColor(...orangeColor);
+                pdf.text('SIGNATURE', 20, yPos);
+                yPos += 10;
+                
+                pdf.setFontSize(10);
+                pdf.setTextColor(0, 0, 0);
+                pdf.text(`Date: ${data.dateSignature || ''}`, 20, yPos);
+                yPos += 15;
+                
+                // Ajout de la signature si elle existe
+                if (data.signature) {
+                    const imgData = data.signature;
+                    pdf.addImage(imgData, 'PNG', 20, yPos, 60, 30);
+                }
+                
+                // Conversion en blob et envoi par email
+                const pdfBlob = pdf.output('blob');
+                
+                // Simulation de l'envoi par email (remplacez par votre service d'email)
+                await sendEmailWithPDF(pdfBlob, data);
+                
+                // Affichage du message de succès
+                showMessage('successMessage');
+                
+            } catch (error) {
+                console.error('Erreur lors de la génération du PDF:', error);
+                showMessage('errorMessage');
+            }
+        }
+
+        async function sendEmailWithPDF(pdfBlob, formData) {
+            // Simulation de l'envoi d'email
+            // Dans un environnement réel, vous devriez utiliser un service comme EmailJS ou un backend
+            
+            // Pour la démonstration, nous simulons un délai d'envoi
+            return new Promise((resolve) => {
+                setTimeout(() => {
+                    console.log('PDF envoyé à benjamin.guillet@tgs-france.fr');
+                    console.log('Données du formulaire:', formData);
+                    resolve();
+                }, 2000);
+            });
+        }
+
+        function showMessage(messageId) {
+            const message = document.getElementById(messageId);
+            message.classList.remove('hidden');
+            setTimeout(() => {
+                message.classList.add('hidden');
+            }, 5000);
+        }
+
+        // Redimensionnement du canvas
+        window.addEventListener('resize', setupCanvas);
+    </script>
+</body>
+</html>
+    <script id="html_badge_script1">
+        window.__genspark_remove_badge_link = "https://www.genspark.ai/api/html_badge/" +
+            "remove_badge?token=To%2FBnjzloZ3UfQdcSaYfDueNg1P3u66UDgfeGitIQB2a4ORLutFNBUDSh%2BUOC5x6eTDlmzn16Ck3t09WQMUgQGlNe2a%2BTnF3X%2BZG8aPVYJ%2BXH0nnl570SBkJEqD2V9Ng6%2BQ3P%2BAmapTA099IER7qlfeX1QegW4GE1RzCKTJCEdi%2FTOB1jkOWwNJPV3Iv73sQ1G66ZPGwKQRslrifD%2FKDN1Cj%2BE5y9CmAnjtZEfKbJEJAfulrS6uvJ99fdmDHUNW9Ay7lAtsRXMH4wnb7AyYa9fiRWzIW6lIC8meva3zMROSUxccnfSC4%2FJGf65V6fH6U8lJlfNrKchNi0a50XXzCkw4Q9QWjTYw7mUaKotLoo9Q4F8Y1VtPCA6zaCbG3IiGDu3B%2BxFqThVxw%2BX4mnBLA6%2B2FXPiyPnb5JtKgPvbMB8tnkwmaDvALpUkAgd6NPmd683vJyAQXBoXkbgnB%2Bg4CQaqXs6LzV5PlbB2H2CyovVwd4%2By0hLt9bZ82ChVSls%2FI1hn4ctMtWQzCih14%2FkA7Aw%3D%3D";
+        window.__genspark_locale = "fr-FR";
+        window.__genspark_token = "To/BnjzloZ3UfQdcSaYfDueNg1P3u66UDgfeGitIQB2a4ORLutFNBUDSh+UOC5x6eTDlmzn16Ck3t09WQMUgQGlNe2a+TnF3X+ZG8aPVYJ+XH0nnl570SBkJEqD2V9Ng6+Q3P+AmapTA099IER7qlfeX1QegW4GE1RzCKTJCEdi/TOB1jkOWwNJPV3Iv73sQ1G66ZPGwKQRslrifD/KDN1Cj+E5y9CmAnjtZEfKbJEJAfulrS6uvJ99fdmDHUNW9Ay7lAtsRXMH4wnb7AyYa9fiRWzIW6lIC8meva3zMROSUxccnfSC4/JGf65V6fH6U8lJlfNrKchNi0a50XXzCkw4Q9QWjTYw7mUaKotLoo9Q4F8Y1VtPCA6zaCbG3IiGDu3B+xFqThVxw+X4mnBLA6+2FXPiyPnb5JtKgPvbMB8tnkwmaDvALpUkAgd6NPmd683vJyAQXBoXkbgnB+g4CQaqXs6LzV5PlbB2H2CyovVwd4+y0hLt9bZ82ChVSls/I1hn4ctMtWQzCih14/kA7Aw==";
+    </script>
+    
+    <script id="html_notice_dialog_script" src="https://www.genspark.ai/notice_dialog.js"></script>
+    
